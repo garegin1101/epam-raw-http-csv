@@ -7,7 +7,7 @@ export default (req, res) => {
     
     if(Urls.length <= 3)
     if(methods[method])
-    if(methods[method][Urls[1]] && methods[method][Urls[1]][Urls[2] ? ":" : "/"])
+    if(methods[method][Urls[1]]?.[Urls[2] ? ":" : "/"])
     methods[method][Urls[1]][Urls[2] ? ":" : "/"](res, req, Urls[2])
     else {
         res.statusCode = 404;
