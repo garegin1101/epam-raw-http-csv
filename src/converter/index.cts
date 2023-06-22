@@ -3,12 +3,6 @@ import fs from "fs"
 import { pipeline } from "stream/promises";
 import path from "path";
 import type { NowDaysReadStream } from "./interfaces.cjs"
-// import { NowDaysReadStream } from './index.cjs';
-
-
-// interface NowDaysReadStream extends ReadStream {
-//     map(callback: Function, options?: {signal?: AbortSignal, concurency?: number}): NowDaysReadStream;
-// }
 
 export const converter = async (fileGroup : string[], dirname: string) => {
     let records = 0;
