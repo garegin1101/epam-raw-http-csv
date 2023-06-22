@@ -2,12 +2,19 @@ import csv from 'csv-parser'
 import fs from "fs"
 import { pipeline } from "stream/promises";
 import path from "path";
+import type { NowDaysReadStream } from "./interfaces.cjs"
+// import { NowDaysReadStream } from './index.cjs';
 
-export default async (fileGroup, dirname) => {
+
+// interface NowDaysReadStream extends ReadStream {
+//     map(callback: Function, options?: {signal?: AbortSignal, concurency?: number}): NowDaysReadStream;
+// }
+
+export const converter = async (fileGroup : string[], dirname: string) => {
     let records = 0;
     for (const file of fileGroup) {
         await pipeline(
-            fs.createReadStream(path.join(dirname, file)).map((chunk)=>{
+            (fs.createReadStream(path.join(dirname, file)) as NowDaysReadStream).map((chunk : Buffer)=>{
                 return chunk.toString()
             }),
             csv(),

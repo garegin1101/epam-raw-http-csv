@@ -1,6 +1,8 @@
+import { ServerResponse } from "http";
 import extending from "../../extending/index.js";
+import type { NowDaysIncomingMessage } from "./interfaces.js"
 
-const convertToJSON = async (res, req) => {
+const convertToJSON = async (res: ServerResponse, req: NowDaysIncomingMessage) => {
     if (req.headers["content-type"] === "text/plain") {
 
             const body = await req.take(1).toArray();
@@ -17,4 +19,4 @@ export default {
     "exports": {
         "/": convertToJSON
     }
-}
+} as const

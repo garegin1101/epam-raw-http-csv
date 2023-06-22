@@ -1,8 +1,8 @@
 import { readdir } from "fs/promises";
 import path from "path";
 
-export default async (dirname, extension = ".csv") => {
-    let files = [];
+export default async (dirname: string, extension = ".csv") => {
+    let files: string[] = [];
     (await readdir(dirname, { withFileTypes: true }))
             .forEach((file) => {
                 if (!file.isDirectory()) 

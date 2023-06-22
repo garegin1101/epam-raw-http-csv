@@ -1,12 +1,14 @@
+import { ServerResponse } from "http";
 import { availableParallelism } from "os";
 
-export default (files, length, res) => {
+export default (files: string[], length: number, res: ServerResponse) => {
     if (files.length == 0) {
         res.statusCode = 400;
         res.end("There is no csv file in this directory");
+        return
     }
 
-    let arr = Array.from({ length }, () => [])
+    let arr: string[][] = Array.from({ length }, () => [])
 
     let i = 0;
     for (const file of files) {
@@ -19,7 +21,7 @@ export default (files, length, res) => {
 
     if (arr.length > 4) {
         const virtualCpus = availableParallelism();
-        process.env.UV_THREADPOOL_SIZE = virtualCpus > arr.length ? arr.length : virtualCpus;
+        process.env.UV_THREADPOOL_SIZE = virtualCpus > arr.length ? String(arr.length) : String(virtualCpus);
     }
 
     return arr;
